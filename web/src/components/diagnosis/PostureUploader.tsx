@@ -2,7 +2,7 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Camera, CheckCircle2, Sparkles, ArrowRight, Loader2 } from "lucide-react";
+import { Camera, CheckCircle2, Sparkles, ArrowRight, Loader2, Wand2, RotateCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { Section, EyebrowText } from "@/components/ui/section";
@@ -13,12 +13,30 @@ type Side = "front" | "side" | "back";
 interface Photo {
   side: Side;
   preview: string;
+  isSample?: boolean;
 }
 
-const sides: { side: Side; label: string; hint: string }[] = [
-  { side: "front", label: "正面", hint: "リラックスして立つ。両手は自然に下ろして。" },
-  { side: "side", label: "横向き", hint: "横から見える姿勢が分かるように。" },
-  { side: "back", label: "後ろ", hint: "後ろからの全身を写してください。" },
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
+const sides: { side: Side; label: string; hint: string; sample: string }[] = [
+  {
+    side: "front",
+    label: "正面",
+    hint: "リラックスして立つ。両手は自然に下ろして。",
+    sample: `${basePath}/samples/posture-front.svg`,
+  },
+  {
+    side: "side",
+    label: "横向き",
+    hint: "横から見える姿勢が分かるように。",
+    sample: `${basePath}/samples/posture-side.svg`,
+  },
+  {
+    side: "back",
+    label: "後ろ",
+    hint: "後ろからの全身を写してください。",
+    sample: `${basePath}/samples/posture-back.svg`,
+  },
 ];
 
 const mockReport = {
@@ -66,6 +84,25 @@ export function PostureUploader() {
     const url = URL.createObjectURL(file);
     setPhotos((prev) => ({ ...prev, [activeSide]: { side: activeSide, preview: url } }));
     e.target.value = "";
+  }
+
+  function loadSample(side: Side) {
+    const cfg = sides.find((s) => s.side === side);
+    if (!cfg) return;
+    setPhotos((prev) => ({ ...prev, [side]: { side, preview: cfg.sample, isSample: true } }));
+  }
+
+  function loadAllSamples() {
+    setPhotos({
+      front: { side: "front", preview: sides[0].sample, isSample: true },
+      side: { side: "side", preview: sides[1].sample, isSample: true },
+      back: { side: "back", preview: sides[2].sample, isSample: true },
+    });
+  }
+
+  function clearSlot(side: Side, e: React.MouseEvent) {
+    e.stopPropagation();
+    setPhotos((prev) => ({ ...prev, [side]: null }));
   }
 
   function analyze() {
@@ -116,32 +153,62 @@ export function PostureUploader() {
                 </p>
               </div>
 
-              <div className="mt-14 grid gap-5 md:grid-cols-3">
+              <div className="mt-10 flex flex-wrap items-center gap-3 rounded-full border border-rose-200/60 bg-white/70 px-4 py-3 backdrop-blur w-fit">
+                <span className="font-display text-[0.7rem] tracking-[0.32em] uppercase text-rose-600/80">
+                  Demo mode
+                </span>
+                <span className="hidden sm:inline-block h-3 w-px bg-rose-200" />
+                <span className="text-xs text-ink-600">
+                  写真の用意がない方は、サンプルで体験できます
+                </span>
+                <Button size="sm" variant="secondary" onClick={loadAllSamples}>
+                  <Wand2 className="h-3.5 w-3.5" />
+                  サンプルで体験
+                </Button>
+              </div>
+
+              <div className="mt-8 grid gap-5 md:grid-cols-3">
                 {sides.map(({ side, label, hint }) => {
                   const photo = photos[side];
                   return (
-                    <button
+                    <div
                       key={side}
-                      onClick={() => uploadFor(side)}
                       className="group relative aspect-[3/4] overflow-hidden rounded-3xl border-2 border-dashed border-rose-300/60 bg-white/60 backdrop-blur transition-all hover:border-rose-500 hover:bg-white"
                     >
                       {photo ? (
-                        <>
+                        <button onClick={() => uploadFor(side)} className="absolute inset-0 cursor-pointer text-left">
                           <div
                             className="absolute inset-0 bg-cover bg-center"
                             style={{ backgroundImage: `url(${photo.preview})` }}
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-ink-800/60 via-ink-800/0 to-ink-800/0" />
                           <div className="absolute inset-0 flex flex-col justify-between p-5 text-white">
-                            <span className="self-end inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/90">
-                              <CheckCircle2 className="h-4 w-4" />
-                            </span>
+                            <div className="flex items-start justify-between">
+                              {photo.isSample && (
+                                <span className="rounded-full bg-rose-600/95 px-3 py-1 font-display text-[0.6rem] tracking-[0.32em] uppercase text-white">
+                                  Sample
+                                </span>
+                              )}
+                              <span className="ml-auto inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-500/90">
+                                <CheckCircle2 className="h-4 w-4" />
+                              </span>
+                            </div>
                             <div>
                               <div className="font-jp-serif text-2xl !font-light">{label}</div>
-                              <div className="mt-1 text-xs opacity-80">アップロード済み</div>
+                              <div className="mt-1 text-xs opacity-80">
+                                {photo.isSample ? "サンプル投入済み・タップで差替え" : "アップロード済み"}
+                              </div>
                             </div>
                           </div>
-                        </>
+                          <button
+                            type="button"
+                            onClick={(e) => clearSlot(side, e)}
+                            className="absolute right-3 top-3 inline-flex h-7 w-7 items-center justify-center rounded-full bg-white/85 text-ink-600 transition-transform hover:scale-110"
+                            aria-label="クリア"
+                          >
+                            <RotateCw className="h-3.5 w-3.5" />
+                          </button>
+                        </button>
                       ) : (
                         <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
                           <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-rose-100 to-rose-200 text-rose-700">
@@ -149,9 +216,26 @@ export function PostureUploader() {
                           </span>
                           <div className="font-jp-serif !font-light text-2xl text-ink-800">{label}</div>
                           <p className="lede-jp text-xs text-ink-400 max-w-[18ch]">{hint}</p>
+                          <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => uploadFor(side)}
+                              className="rounded-full bg-rose-600 px-4 py-1.5 text-[0.7rem] font-medium text-white transition-transform hover:-translate-y-[1px]"
+                            >
+                              写真をアップロード
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => loadSample(side)}
+                              className="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1.5 text-[0.7rem] font-medium text-rose-700 ring-1 ring-rose-200 transition-transform hover:-translate-y-[1px]"
+                            >
+                              <Wand2 className="h-3 w-3" />
+                              サンプルを使う
+                            </button>
+                          </div>
                         </div>
                       )}
-                    </button>
+                    </div>
                   );
                 })}
               </div>

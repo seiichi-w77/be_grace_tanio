@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 640" width="480" height="640">
+  <defs>
+    <linearGradient id="bgB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f4ebda"/>
+      <stop offset="50%" stop-color="#d6dccd"/>
+      <stop offset="100%" stop-color="#7ea3b1"/>
+    </linearGradient>
+    <linearGradient id="bodyB" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#43392c"/>
+      <stop offset="100%" stop-color="#8c4b62"/>
+    </linearGradient>
+    <radialGradient id="auraB" cx="0.5" cy="0.4" r="0.55">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="softB" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="0.8"/>
+    </filter>
+  </defs>
+
+  <rect width="480" height="640" fill="url(#bgB)"/>
+  <circle cx="240" cy="240" r="220" fill="url(#auraB)"/>
+
+  <!-- floor shadow -->
+  <ellipse cx="240" cy="590" rx="120" ry="14" fill="#2d2a26" opacity="0.1"/>
+
+  <!-- back view silhouette — hair, slight right-shoulder elevation (AI finding) -->
+  <g fill="url(#bodyB)" filter="url(#softB)">
+    <!-- head with long hair -->
+    <ellipse cx="240" cy="118" rx="34" ry="36"/>
+    <path d="M212 130 Q200 200 208 280 Q216 330 224 360
+             L256 360 Q264 330 272 280 Q280 200 268 130 Z" opacity="0.9"/>
+    <!-- neck -->
+    <path d="M225 150 Q240 162 255 150 L255 172 Q240 180 225 172 Z"/>
+    <!-- torso w/ slight asymmetry (right shoulder ~4mm higher) -->
+    <path d="M178 182 Q198 174 240 172 Q282 174 302 184
+             Q316 240 308 296
+             Q316 350 300 396
+             L302 432
+             Q272 444 240 444 Q208 444 178 432
+             L180 396
+             Q166 350 174 296
+             Q166 240 178 182 Z"/>
+    <!-- arms -->
+    <path d="M178 192 Q158 232 154 290 Q152 358 160 410
+             L160 446 Q152 444 148 432
+             Q140 386 144 326 Q140 258 154 200 Z"/>
+    <path d="M302 192 Q322 232 326 290 Q328 358 320 410
+             L320 446 Q328 444 332 432
+             Q340 386 336 326 Q340 258 326 200 Z"/>
+    <!-- hips -->
+    <path d="M180 430 Q210 438 240 438 Q270 438 300 430
+             L308 470 Q272 480 240 480 Q208 480 172 470 Z"/>
+    <!-- legs -->
+    <path d="M194 478 Q200 528 206 580 L208 596
+             Q224 596 222 588 L218 564 Q216 524 220 482 Z"/>
+    <path d="M286 478 Q280 528 274 580 L272 596
+             Q256 596 258 588 L262 564 Q264 524 260 482 Z"/>
+  </g>
+
+  <!-- AI center spine line -->
+  <line x1="240" y1="50" x2="240" y2="610" stroke="#b5677f" stroke-width="0.6" stroke-dasharray="4 6" opacity="0.55"/>
+
+  <!-- detected slight shoulder tilt -->
+  <line x1="186" y1="192" x2="296" y2="184" stroke="#c79a5a" stroke-width="1.4" opacity="0.7"/>
+  <line x1="184" y1="438" x2="298" y2="438" stroke="#b5677f" stroke-width="0.6" stroke-dasharray="3 7" opacity="0.4"/>
+  <line x1="60" y1="438" x2="420" y2="438" stroke="#b5677f" stroke-width="0.5" stroke-dasharray="3 7" opacity="0.3"/>
+
+  <!-- spine waypoints -->
+  <g>
+    <circle cx="186" cy="192" r="6" fill="#fffbf7" stroke="#c79a5a" stroke-width="1.6"/>
+    <circle cx="296" cy="184" r="6" fill="#fffbf7" stroke="#c79a5a" stroke-width="1.6"/>
+    <circle cx="240" cy="240" r="4.5" fill="#fffbf7" stroke="#b5677f" stroke-width="1.4"/>
+    <circle cx="240" cy="320" r="4.5" fill="#fffbf7" stroke="#b5677f" stroke-width="1.4"/>
+    <circle cx="240" cy="396" r="4.5" fill="#fffbf7" stroke="#b5677f" stroke-width="1.4"/>
+    <circle cx="196" cy="438" r="6" fill="#fffbf7" stroke="#b5677f" stroke-width="1.6"/>
+    <circle cx="284" cy="438" r="6" fill="#fffbf7" stroke="#b5677f" stroke-width="1.6"/>
+    <circle cx="212" cy="560" r="5" fill="#fffbf7" stroke="#b5677f" stroke-width="1.4"/>
+    <circle cx="268" cy="560" r="5" fill="#fffbf7" stroke="#b5677f" stroke-width="1.4"/>
+  </g>
+
+  <g font-family="Cormorant Garamond, Georgia, serif" font-style="italic" fill="#43392c" opacity="0.6">
+    <text x="32" y="36" font-size="14" letter-spacing="2">Back view · sample</text>
+  </g>
+  <g font-family="Cormorant Garamond, Georgia, serif" fill="#43392c" opacity="0.45">
+    <text x="32" y="608" font-size="11" letter-spacing="3">BE GRACE · AI VISION</text>
+  </g>
+</svg>
