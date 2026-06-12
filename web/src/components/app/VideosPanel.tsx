@@ -4,7 +4,7 @@ import { useState, useMemo } from "react";
 import Link from "next/link";
 import { Crown, PlayCircle, Search } from "lucide-react";
 import { useAppStore } from "@/lib/store";
-import { VIDEOS, VIDEO_SERIES } from "@/lib/mock/videos";
+import { VIDEOS, VIDEO_SERIES, youtubeThumb } from "@/lib/mock/videos";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { formatNumber } from "@/lib/utils";
@@ -70,12 +70,25 @@ export function VideosPanel() {
               className="group relative overflow-hidden rounded-3xl bg-white shadow-[0_8px_24px_-12px_rgba(45,42,38,0.1)] ring-1 ring-ink-800/[0.05] transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(181,103,127,0.25)]"
             >
               <div
-                className="relative aspect-[16/10] overflow-hidden"
-                style={{ background: v.thumbnail }}
+                className="relative aspect-[16/10] overflow-hidden bg-ink-800"
+                style={!v.youtubeId ? { background: v.thumbnail } : undefined}
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/0 to-black/0" />
+                {v.youtubeId && (
+                  <img
+                    src={youtubeThumb(v.youtubeId, "max")}
+                    alt={v.title}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                    loading="lazy"
+                    onError={(e) => {
+                      const el = e.currentTarget;
+                      const hq = youtubeThumb(v.youtubeId!, "hq");
+                      if (el.src !== hq) el.src = hq;
+                    }}
+                  />
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-ink-800/80 via-ink-800/10 to-ink-800/30" />
                 <div className="absolute left-4 top-4 flex gap-2">
-                  <Badge tone="outline" className="border-white/40 bg-white/20 text-white">
+                  <Badge tone="outline" className="border-white/30 bg-white/15 text-white backdrop-blur">
                     {v.category}
                   </Badge>
                   {v.isVip && (
@@ -84,16 +97,16 @@ export function VideosPanel() {
                     </Badge>
                   )}
                 </div>
-                <div className="absolute right-4 bottom-4 rounded-full bg-black/60 px-3 py-1 text-xs text-white">
+                <div className="absolute right-4 bottom-4 rounded-full bg-black/60 px-3 py-1 text-[0.7rem] text-white tabular-nums backdrop-blur">
                   {v.duration}
                 </div>
                 <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/80 text-rose-700 backdrop-blur transition-transform group-hover:scale-110">
-                    <PlayCircle className="h-7 w-7" />
+                  <span className="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white/90 text-rose-700 shadow-2xl backdrop-blur transition-transform group-hover:scale-110">
+                    <PlayCircle className="h-8 w-8" />
                   </span>
                 </div>
                 {locked && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-ink-800/70 text-white backdrop-blur">
+                  <div className="absolute inset-0 flex items-center justify-center bg-ink-800/75 text-white backdrop-blur">
                     <div className="text-center">
                       <Crown className="mx-auto h-7 w-7" />
                       <p className="mt-2 font-medium">VIPで解放</p>
@@ -103,14 +116,19 @@ export function VideosPanel() {
                 )}
               </div>
               <div className="p-5">
-                <div className="text-[0.62rem] tracking-[0.24em] uppercase text-rose-600/70">
+                <div className="font-display text-[0.62rem] tracking-[0.28em] uppercase text-rose-600/70">
                   {v.subtitle}
                 </div>
-                <h3 className="mt-1 font-serif text-lg leading-tight text-ink-800">{v.title}</h3>
-                <p className="mt-2 line-clamp-2 text-xs text-ink-400">{v.description}</p>
+                <h3
+                  className="headline-jp mt-1.5 text-ink-800"
+                  style={{ fontSize: "1.075rem", lineHeight: 1.45 }}
+                >
+                  {v.title}
+                </h3>
+                <p className="lede-jp mt-2 line-clamp-2 text-[0.78rem] text-ink-400">{v.description}</p>
                 <div className="mt-3 flex items-center justify-between text-xs text-ink-400">
                   <span>{v.level}</span>
-                  <span>{formatNumber(v.views)} 回視聴</span>
+                  <span className="tabular-nums">{formatNumber(v.views)} 回視聴</span>
                 </div>
               </div>
             </Link>

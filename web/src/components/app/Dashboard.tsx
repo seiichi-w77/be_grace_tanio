@@ -16,7 +16,7 @@ import { useAppStore, levelLabel, pointsToNextLevel } from "@/lib/store";
 import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { VIDEOS } from "@/lib/mock/videos";
+import { VIDEOS, youtubeThumb } from "@/lib/mock/videos";
 import { formatNumber, shortJpDate, greet } from "@/lib/utils";
 
 export function Dashboard() {
@@ -145,16 +145,24 @@ export function Dashboard() {
                 href={`/app/videos/${v.id}`}
                 className="group flex items-center gap-4 rounded-2xl p-3 transition-colors hover:bg-cream-50"
               >
-                <div
-                  className="relative h-20 w-28 shrink-0 overflow-hidden rounded-xl"
-                  style={{ background: v.thumbnail }}
+                <div className="relative h-20 w-28 shrink-0 overflow-hidden rounded-xl bg-ink-800"
+                  style={!v.youtubeId ? { background: v.thumbnail } : undefined}
                 >
+                  {v.youtubeId && (
+                    <img
+                      src={youtubeThumb(v.youtubeId, "hq")}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  )}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                   <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white/80 text-rose-700 backdrop-blur transition-transform group-hover:scale-110">
-                      <PlayCircle className="h-5 w-5" />
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-white/85 text-rose-700 backdrop-blur transition-transform group-hover:scale-110">
+                      <PlayCircle className="h-4 w-4" />
                     </span>
                   </div>
-                  <span className="absolute right-1.5 bottom-1.5 rounded-full bg-black/50 px-1.5 py-0.5 text-[10px] text-white">
+                  <span className="absolute right-1.5 bottom-1.5 rounded-full bg-black/60 px-1.5 py-0.5 text-[9px] text-white tabular-nums backdrop-blur">
                     {v.duration}
                   </span>
                 </div>

@@ -50,6 +50,10 @@ export interface VideoLesson {
   level: "初級" | "中級" | "上級";
   description: string;
   series?: string;
+  /** YouTube video ID — used for iframe embed and thumbnail */
+  youtubeId?: string;
+  /** Channel / creator credit shown under the player */
+  source?: string;
 }
 
 export interface ChatThread {
