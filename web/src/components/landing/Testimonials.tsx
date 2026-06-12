@@ -34,8 +34,7 @@ export function Testimonials() {
         eyebrow="STORIES"
         title={
           <>
-            すでに <span className="font-display italic text-rose-700">受け取りはじめた</span>
-            <br className="hidden md:block" />
+            すでに<span className="text-rose-700">受け取りはじめた</span>
             女性たちの声。
           </>
         }
@@ -50,8 +49,9 @@ export function Testimonials() {
             transition={{ duration: 0.7, delay: idx * 0.08, ease: [0.22, 1, 0.36, 1] }}
             className="group relative overflow-hidden rounded-[2rem] bg-gradient-to-br from-cream-50 to-rose-50 p-8 ring-1 ring-ink-800/[0.05]"
           >
-            <span className="font-display text-7xl italic text-rose-300/70">"</span>
-            <blockquote className="-mt-6 font-serif text-lg leading-relaxed text-ink-800">
+            {/* Decorative Latin quote — Cormorant safe */}
+            <span aria-hidden className="font-display text-[5rem] leading-none italic text-rose-300/70">&ldquo;</span>
+            <blockquote className="-mt-4 font-jp-serif text-[1.05rem] leading-[1.85] text-ink-800">
               {s.quote}
             </blockquote>
             <figcaption className="mt-6 flex items-center justify-between border-t border-ink-800/[0.06] pt-4">

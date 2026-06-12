@@ -13,7 +13,7 @@ const steps = [
   {
     icon: Sprout,
     title: "なりたい未来を、選ぶ",
-    body: "「鏡を見るのが楽しみな朝」「夜ぐっすり眠れるからだ」――ゴールから設計するセルフケア。",
+    body: "「鏡を見るのが楽しみな朝」「夜ぐっすり眠れるからだ」——ゴールから設計するセルフケア。",
   },
   {
     icon: Sparkles,
@@ -34,14 +34,14 @@ export function HowItWorks() {
         eyebrow="HOW IT WORKS"
         title={
           <>
-            診断から、会員サイトまで。<br className="hidden md:block" />
-            <span className="font-display italic text-rose-700">一気通貫</span>の優しい導線。
+            診断から、会員サイトまで。
+            <span className="text-rose-700">一気通貫の優しい導線。</span>
           </>
         }
         description="集客は診断アプリ、本丸は会員サイト。診断 → 個別相談・講座 → 会員サイトでの継続伴走、全てがひとつの体験として繋がります。"
       />
 
-      <div className="relative grid gap-6 md:grid-cols-4">
+      <div className="relative grid gap-8 md:grid-cols-4 md:gap-6">
         <div className="absolute left-0 right-0 top-12 hidden h-px bg-gradient-to-r from-transparent via-rose-200 to-transparent md:block" />
         {steps.map((s, idx) => (
           <motion.div
@@ -59,11 +59,16 @@ export function HowItWorks() {
               </div>
             </div>
             <div className="mt-6 text-center">
-              <span className="font-display text-xs tracking-[0.32em] text-rose-600/80">
-                STEP {String(idx + 1).padStart(2, "0")}
+              <span className="font-display text-[0.68rem] tracking-[0.36em] uppercase text-rose-600/80">
+                Step {String(idx + 1).padStart(2, "0")}
               </span>
-              <h3 className="mt-2 text-lg font-light tracking-wide text-ink-800">{s.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-ink-400">{s.body}</p>
+              <h3
+                className="headline-jp mt-2 text-ink-800 mx-auto max-w-[14ch]"
+                style={{ fontSize: "var(--type-h3)" }}
+              >
+                {s.title}
+              </h3>
+              <p className="lede-jp mt-3 text-ink-400 mx-auto max-w-[28ch] text-[0.9rem]">{s.body}</p>
             </div>
           </motion.div>
         ))}

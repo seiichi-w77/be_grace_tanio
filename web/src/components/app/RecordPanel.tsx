@@ -44,13 +44,16 @@ export function RecordPanel() {
   return (
     <div className="space-y-6">
       <header>
-        <span className="font-display text-xs tracking-[0.32em] uppercase text-rose-600/70">
-          DAILY RECORD
+        <span className="font-display text-[0.7rem] tracking-[0.36em] uppercase text-rose-600/70">
+          Daily record
         </span>
-        <h2 className="mt-2 font-serif text-3xl md:text-4xl font-light text-ink-800">
+        <h2
+          className="headline-jp mt-3 text-ink-800 max-w-[20ch]"
+          style={{ fontSize: "var(--type-h2)" }}
+        >
           今日のあなたを、3分で記す。
         </h2>
-        <p className="mt-3 text-sm text-ink-400">
+        <p className="lede-jp mt-4 max-w-[36ch] text-[0.95rem] text-ink-400">
           完璧でなくていい。たったの3分でも、続けている自分を、優しく記録してください。
         </p>
       </header>

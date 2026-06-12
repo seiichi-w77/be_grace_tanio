@@ -22,12 +22,16 @@ export default function SignupPage() {
     <PageShell hideFooter>
       <Section className="hero-gradient">
         <div className="mx-auto max-w-md">
-          <EyebrowText>JOIN BE GRACE</EyebrowText>
-          <h1 className="mt-6 font-serif text-4xl md:text-5xl font-light leading-tight text-ink-800">
-            ようこそ、<br />
-            <span className="font-display italic text-rose-700">Be Grace</span> へ。
+          <EyebrowText>Join Be Grace</EyebrowText>
+          <h1
+            className="headline-jp mt-6 text-ink-800"
+            style={{ fontSize: "var(--type-h1)" }}
+          >
+            ようこそ、
+            <span className="block font-display italic !font-light text-rose-700">Be Grace</span>
+            <span>へ。</span>
           </h1>
-          <p className="mt-6 text-sm leading-relaxed text-ink-400">
+          <p className="lede-jp mt-6 text-[0.95rem] text-ink-400 max-w-[34ch]">
             無料会員で、毎日のセルフケアと診断結果を保存できます。
           </p>
           <form onSubmit={submit} className="mt-10 space-y-4 rounded-3xl bg-white/80 p-7 backdrop-blur ring-1 ring-ink-800/[0.06]">

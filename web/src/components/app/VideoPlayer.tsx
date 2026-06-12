@@ -52,11 +52,16 @@ export function VideoPlayer({ video }: { video: VideoLesson }) {
           </motion.button>
         </div>
         <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-          <div className="font-display text-xl">{video.subtitle}</div>
-          <h1 className="font-serif text-3xl md:text-4xl leading-tight">{video.title}</h1>
+          <div className="font-display italic !font-light text-xl">{video.subtitle}</div>
+          <h1
+            className="headline-jp !text-white max-w-[24ch]"
+            style={{ fontSize: "var(--type-h2)" }}
+          >
+            {video.title}
+          </h1>
           <div className="mt-4 flex items-center gap-3">
             <Progress value={progress} className="flex-1" />
-            <span className="font-display text-sm">{video.duration}</span>
+            <span className="font-display !font-light text-sm tabular-nums">{video.duration}</span>
           </div>
         </div>
       </div>
@@ -71,7 +76,7 @@ export function VideoPlayer({ video }: { video: VideoLesson }) {
               {formatNumber(video.views)} 回視聴
             </span>
           </div>
-          <p className="font-serif text-lg leading-relaxed text-ink-800">{video.description}</p>
+          <p className="font-jp-serif text-[1.05rem] leading-[1.85] text-ink-800 max-w-[44ch]">{video.description}</p>
 
           <div className="flex flex-wrap gap-3">
             <Button onClick={complete}>
@@ -92,14 +97,24 @@ export function VideoPlayer({ video }: { video: VideoLesson }) {
 
         <aside className="space-y-4">
           <div className="rounded-3xl bg-white p-6 ring-1 ring-ink-800/[0.05]">
-            <h3 className="font-serif text-xl text-ink-800">あなたへのアドバイス</h3>
-            <p className="mt-3 text-sm leading-relaxed text-ink-400">
+            <h3
+              className="headline-jp text-ink-800"
+              style={{ fontSize: "var(--type-h3)" }}
+            >
+              あなたへのアドバイス
+            </h3>
+            <p className="lede-jp mt-3 text-[0.9rem] text-ink-400 max-w-[32ch]">
               呼吸を止めないこと。1セッション3回まで戻ってきても大丈夫。完璧でなくていい、続けることが正解です。
             </p>
           </div>
           <div className="rounded-3xl bg-gradient-to-br from-rose-100 to-rose-50 p-6">
-            <h3 className="font-serif text-xl text-ink-800">次に進むなら</h3>
-            <p className="mt-3 text-sm text-ink-700/80">
+            <h3
+              className="headline-jp text-ink-800"
+              style={{ fontSize: "var(--type-h3)" }}
+            >
+              次に進むなら
+            </h3>
+            <p className="lede-jp mt-3 text-[0.9rem] text-ink-700/80 max-w-[32ch]">
               この動画の後におすすめ：「夜のリラックスフロー」「VIP 整骨院世界最高峰メソッド」
             </p>
           </div>

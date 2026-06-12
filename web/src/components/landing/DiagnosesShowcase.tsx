@@ -27,11 +27,11 @@ export function DiagnosesShowcase() {
         eyebrow="DIAGNOSIS COLLECTION"
         title={
           <>
-            なりたい未来から、<br className="hidden md:block" />
-            <span className="font-display italic text-rose-700">3 つの</span>からだ診断。
+            なりたい未来から、
+            <span className="text-rose-700">3つのからだ診断。</span>
           </>
         }
-        description="一つの「型」に、テーマ・問い・タイプを差し替えて。骨格、セルフケア、AI 姿勢――あなたを見立てる入口を選んでください。"
+        description="一つの「型」に、テーマ・問い・タイプを差し替えて。骨格、セルフケア、AI 姿勢——あなたを見立てる入口を選んでください。"
       />
 
       <div className="grid gap-6 md:grid-cols-3">
@@ -50,27 +50,30 @@ export function DiagnosesShowcase() {
               <div
                 className={`relative h-56 overflow-hidden bg-gradient-to-br ${accentMap[d.accent]}`}
               >
-                <div className="absolute inset-0 flex items-end justify-between p-6">
-                  <div>
-                    <span className="text-[0.62rem] tracking-[0.32em] uppercase text-ink-800/60">
+                <div className="absolute inset-0 flex items-end justify-between gap-3 p-6">
+                  <div className="min-w-0">
+                    <span className="font-display text-[0.62rem] tracking-[0.32em] uppercase text-ink-800/60">
                       {d.badge}
                     </span>
-                    <h3 className={`mt-2 font-display text-3xl ${accentText[d.accent]}`}>
+                    <h3
+                      className={`headline-jp mt-2 ${accentText[d.accent]}`}
+                      style={{ fontSize: "var(--type-h3)" }}
+                    >
                       {d.title}
                     </h3>
                   </div>
-                  <span className="inline-flex h-12 w-12 items-center justify-center rounded-full bg-white/80 text-ink-800 transition-transform group-hover:rotate-45">
+                  <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/80 text-ink-800 transition-transform group-hover:rotate-45">
                     <ArrowUpRight className="h-5 w-5" />
                   </span>
                 </div>
                 <FloatingShape />
               </div>
               <div className="flex flex-1 flex-col gap-4 p-7">
-                <p className="font-serif text-lg leading-relaxed text-ink-800">
+                <p className="font-jp-serif text-[1.05rem] leading-[1.75] text-ink-800">
                   {d.catchphrase}
                 </p>
-                <p className="text-sm leading-relaxed text-ink-400">{d.description}</p>
-                <div className="mt-auto flex items-center gap-2 pt-3 text-xs text-ink-400">
+                <p className="lede-jp text-ink-400 text-[0.9rem]">{d.description}</p>
+                <div className="mt-auto flex items-center gap-2 pt-3">
                   <Badge tone="outline">{d.duration}</Badge>
                   <Badge tone="outline">{d.questionsCount} 問</Badge>
                 </div>

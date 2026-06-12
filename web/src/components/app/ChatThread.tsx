@@ -47,8 +47,13 @@ export function ChatThread({ threadId }: { threadId: string }) {
         </Link>
       </div>
       <header className="rounded-3xl bg-white p-5 shadow-[0_8px_24px_-12px_rgba(45,42,38,0.1)] ring-1 ring-ink-800/[0.05]">
-        <h3 className="font-serif text-2xl font-light text-ink-800">{thread.topic}</h3>
-        <p className="mt-1 text-xs text-ink-400">あなた・先生・AIアシスタントの3者でやりとりします。</p>
+        <h3
+          className="headline-jp text-ink-800 max-w-[28ch]"
+          style={{ fontSize: "var(--type-h3)" }}
+        >
+          {thread.topic}
+        </h3>
+        <p className="lede-jp mt-2 text-xs text-ink-400">あなた・先生・AIアシスタントの3者でやりとりします。</p>
       </header>
 
       <div ref={scrollRef} className="mt-4 flex-1 space-y-4 overflow-y-auto pr-2">

@@ -35,15 +35,18 @@ export default async function DiagnosisIntroPage({
       <Section className={`bg-gradient-to-br ${accentMap[theme.accent]}`}>
         <div className="max-w-3xl">
           <EyebrowText>{theme.badge}</EyebrowText>
-          <h1 className="mt-6 font-serif text-5xl md:text-7xl font-light leading-[1.05] text-ink-800">
+          <h1
+            className="headline-jp mt-6 text-ink-800 max-w-[14ch]"
+            style={{ fontSize: "var(--type-display)" }}
+          >
             {theme.title}
           </h1>
-          <p className="mt-8 font-serif text-xl md:text-2xl leading-relaxed text-ink-800/85">
+          <p className="font-jp-serif mt-8 text-[1.25rem] md:text-[1.4rem] leading-[1.85] text-ink-800/85 max-w-[28ch]">
             {theme.catchphrase}
           </p>
-          <p className="mt-6 max-w-xl text-base leading-loose text-ink-700/70">{theme.hero}</p>
+          <p className="lede-jp mt-6 max-w-[36ch] text-ink-700/70">{theme.hero}</p>
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-10 flex flex-wrap gap-2">
             <Badge tone="outline" className="border-white/40 bg-white/30 text-ink-800">
               <Clock className="h-3 w-3" />
               {theme.duration}
@@ -54,11 +57,11 @@ export default async function DiagnosisIntroPage({
             </Badge>
             <Badge tone="outline" className="border-white/40 bg-white/30 text-ink-800">
               <Sparkles className="h-3 w-3" />
-              FREE
+              Free
             </Badge>
           </div>
 
-          <div className="mt-12">
+          <div className="mt-10">
             <Button asChild size="xl">
               <Link href={playHref}>
                 診断をはじめる
@@ -70,14 +73,17 @@ export default async function DiagnosisIntroPage({
       </Section>
 
       <Section className="bg-cream-50">
-        <div className="grid gap-12 md:grid-cols-[1fr_1.2fr]">
+        <div className="grid gap-12 md:grid-cols-[1fr_1.4fr]">
           <div>
-            <EyebrowText>WHAT YOU&apos;LL RECEIVE</EyebrowText>
-            <h2 className="mt-6 font-serif text-3xl md:text-4xl font-light leading-tight text-ink-800">
+            <EyebrowText>What you&apos;ll receive</EyebrowText>
+            <h2
+              className="headline-jp mt-6 text-ink-800"
+              style={{ fontSize: "var(--type-h2)" }}
+            >
               受け取れるもの
             </h2>
           </div>
-          <ul className="space-y-6">
+          <ul className="space-y-7 max-w-[44ch]">
             {[
               {
                 title: "あなたのタイプ・物語",
@@ -97,10 +103,15 @@ export default async function DiagnosisIntroPage({
               },
             ].map((b) => (
               <li key={b.title} className="flex gap-4">
-                <span className="mt-1 inline-flex h-2 w-2 shrink-0 rounded-full bg-rose-500" />
+                <span className="mt-2 inline-flex h-2 w-2 shrink-0 rounded-full bg-rose-500" />
                 <div>
-                  <h3 className="font-serif text-lg text-ink-800">{b.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-ink-400">{b.body}</p>
+                  <h3
+                    className="headline-jp text-ink-800"
+                    style={{ fontSize: "var(--type-h3)" }}
+                  >
+                    {b.title}
+                  </h3>
+                  <p className="lede-jp mt-2 text-[0.95rem] text-ink-400">{b.body}</p>
                 </div>
               </li>
             ))}

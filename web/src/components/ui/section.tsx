@@ -7,7 +7,7 @@ export function Section({
   ...props
 }: React.HTMLAttributes<HTMLElement>) {
   return (
-    <section className={cn("relative w-full py-24 md:py-32", className)} {...props}>
+    <section className={cn("relative w-full py-20 md:py-28", className)} {...props}>
       <div className="mx-auto w-full max-w-6xl px-6 md:px-10">{children}</div>
     </section>
   );
@@ -23,7 +23,7 @@ export function EyebrowText({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-2 text-[0.68rem] tracking-[0.32em] uppercase text-rose-600/80",
+        "inline-flex items-center gap-2 font-display text-[0.68rem] tracking-[0.36em] uppercase text-rose-600/80",
         className
       )}
     >
@@ -47,16 +47,23 @@ export function SectionTitle({
   return (
     <div
       className={cn(
-        "max-w-2xl mb-14",
-        align === "center" && "mx-auto text-center"
+        "max-w-[34ch] mb-12 md:mb-16",
+        align === "center" && "mx-auto text-center max-w-[26ch]"
       )}
     >
       {eyebrow && <EyebrowText>{eyebrow}</EyebrowText>}
-      <h2 className="mt-5 font-light text-3xl md:text-5xl leading-[1.2] text-ink-800">
+      <h2
+        className="headline-jp mt-5 text-ink-800"
+        style={{ fontSize: "var(--type-h2)" }}
+      >
         {title}
       </h2>
       {description && (
-        <p className="mt-6 text-ink-400 leading-relaxed text-base md:text-lg">{description}</p>
+        <p
+          className="lede-jp mt-6 text-ink-400 max-w-[44ch]"
+        >
+          {description}
+        </p>
       )}
     </div>
   );

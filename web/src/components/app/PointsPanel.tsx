@@ -32,15 +32,17 @@ export function PointsPanel() {
           <div className="absolute -top-10 right-1/4 h-72 w-72 rounded-full bg-rose-500 blur-3xl" />
         </div>
         <div className="relative">
-          <span className="font-display text-xs tracking-[0.32em] text-white/85">
-            YOUR GRACE POINTS
+          <span className="font-display text-[0.7rem] tracking-[0.36em] uppercase text-white/85">
+            Your Grace Points
           </span>
-          <div className="mt-3 font-display text-6xl md:text-8xl italic">{formatNumber(user.points)}</div>
-          <p className="mt-3 text-sm tracking-wide text-white/85">
-            {levelLabel(user.level)} · Lv.{user.level} · 連続 {user.streak}日
+          <div className="mt-4 font-display !font-light italic tabular-nums leading-none text-[clamp(3.5rem,7vw+1rem,6.5rem)]">
+            {formatNumber(user.points)}
+          </div>
+          <p className="lede-jp mt-4 !text-white/85 text-[0.95rem]">
+            {levelLabel(user.level)} · Lv.<span className="tabular-nums">{user.level}</span> · 連続 <span className="tabular-nums">{user.streak}</span>日
           </p>
           <div className="mt-8 max-w-md">
-            <div className="flex items-center justify-between text-xs text-white/85">
+            <div className="flex items-center justify-between text-xs text-white/85 tabular-nums">
               <span>次のレベルまで</span>
               <span>{formatNumber(lvl.inLevel)} / {formatNumber(lvl.next)}</span>
             </div>
@@ -53,7 +55,12 @@ export function PointsPanel() {
         <Card>
           <CardContent className="p-7">
             <div className="flex items-center justify-between">
-              <h3 className="font-serif text-2xl font-light text-ink-800">ご褒美と交換</h3>
+              <h3
+                className="headline-jp text-ink-800"
+                style={{ fontSize: "var(--type-h3)" }}
+              >
+                ご褒美と交換
+              </h3>
               <Badge tone="gold"><Sparkles className="h-3 w-3" />ストア</Badge>
             </div>
             <ul className="mt-6 space-y-3">
@@ -82,7 +89,12 @@ export function PointsPanel() {
 
         <Card>
           <CardContent className="p-7">
-            <h3 className="font-serif text-2xl font-light text-ink-800">最近の獲得</h3>
+            <h3
+              className="headline-jp text-ink-800"
+              style={{ fontSize: "var(--type-h3)" }}
+            >
+              最近の獲得
+            </h3>
             <ul className="mt-6 space-y-3">
               {records.slice(0, 8).map((r) => (
                 <li key={r.id} className="flex items-center justify-between text-sm">

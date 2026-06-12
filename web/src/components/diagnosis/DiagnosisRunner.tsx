@@ -45,10 +45,10 @@ export function DiagnosisRunner({ theme }: { theme: DiagnosisTheme }) {
     <section className={`min-h-[calc(100dvh-7rem)] bg-gradient-to-br ${accentMap[theme.accent]}`}>
       <div className="mx-auto max-w-3xl px-6 py-12 md:py-20">
         <div className="mb-10 flex items-center justify-between">
-          <span className="text-[0.62rem] tracking-[0.32em] uppercase text-ink-400">
+          <span className="font-display text-[0.62rem] tracking-[0.32em] uppercase text-ink-400">
             {theme.badge}
           </span>
-          <span className="font-display text-sm text-ink-400">
+          <span className="font-display !font-light text-sm tabular-nums text-ink-400">
             {String(step + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
           </span>
         </div>
@@ -67,11 +67,14 @@ export function DiagnosisRunner({ theme }: { theme: DiagnosisTheme }) {
               <span className="font-display text-[0.7rem] tracking-[0.32em] uppercase text-rose-600/70">
                 Q{String(step + 1).padStart(2, "0")}
               </span>
-              <h2 className="mt-3 font-serif text-3xl md:text-4xl font-light leading-snug text-ink-800">
+              <h2
+                className="headline-jp mt-3 text-ink-800 max-w-[26ch]"
+                style={{ fontSize: "var(--type-h1)" }}
+              >
                 {q.text}
               </h2>
               {q.caption && (
-                <p className="mt-3 text-sm leading-relaxed text-ink-400">{q.caption}</p>
+                <p className="lede-jp mt-3 text-[0.95rem] text-ink-400 max-w-[34ch]">{q.caption}</p>
               )}
             </div>
 

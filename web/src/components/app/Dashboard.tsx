@@ -45,13 +45,16 @@ export function Dashboard() {
           <div className="absolute -bottom-20 left-1/4 h-72 w-72 rounded-full bg-rose-300 blur-3xl" />
         </div>
         <div className="relative">
-          <span className="font-display text-xs tracking-[0.32em] text-rose-100/85">
+          <span className="font-display text-[0.7rem] tracking-[0.32em] uppercase text-rose-100/85 tabular-nums">
             {new Date().toLocaleDateString("ja-JP", { year: "numeric", month: "long", day: "numeric", weekday: "long" })}
           </span>
-          <h2 className="mt-3 font-serif text-3xl md:text-5xl font-light leading-tight">
-            {greet(user.name)}<span className="font-display italic">.</span>
+          <h2
+            className="headline-jp !text-white mt-4 max-w-[20ch]"
+            style={{ fontSize: "var(--type-h1)" }}
+          >
+            {greet(user.name)}。
           </h2>
-          <p className="mt-4 max-w-xl text-rose-100/85">
+          <p className="lede-jp mt-4 max-w-[34ch] !text-rose-100/85">
             今日も、3分の呼吸から。あなたが続けているこの時間が、3ヶ月後の景色を作っています。
           </p>
 
@@ -80,15 +83,20 @@ export function Dashboard() {
         <div className="rounded-3xl bg-white p-7 shadow-[0_8px_24px_-12px_rgba(45,42,38,0.1)] ring-1 ring-ink-800/[0.05]">
           <div className="flex items-baseline justify-between">
             <div>
-              <span className="font-display text-xs tracking-[0.32em] uppercase text-rose-600/70">
-                LEVEL {String(user.level).padStart(2, "0")}
+              <span className="font-display text-[0.7rem] tracking-[0.36em] uppercase text-rose-600/70 tabular-nums">
+                Level {String(user.level).padStart(2, "0")}
               </span>
-              <h3 className="mt-2 font-serif text-2xl text-ink-800">{levelLabel(user.level)}</h3>
+              <h3
+                className="headline-jp mt-2 text-ink-800"
+                style={{ fontSize: "var(--type-h3)" }}
+              >
+                {levelLabel(user.level)}
+              </h3>
             </div>
             <Trophy className="h-6 w-6 text-rose-500" strokeWidth={1.2} />
           </div>
-          <p className="mt-3 text-sm text-ink-400">
-            次のレベルまで <span className="text-rose-700 font-medium">{lvl.next - lvl.inLevel}pt</span>。あと2-3セッションで、次の称号「{levelLabel(user.level + 1)}」へ。
+          <p className="lede-jp mt-3 text-[0.9rem] text-ink-400 max-w-[36ch]">
+            次のレベルまで <span className="text-rose-700 font-medium tabular-nums">{lvl.next - lvl.inLevel}pt</span>。あと2〜3セッションで、次の称号「{levelLabel(user.level + 1)}」へ。
           </p>
           <Progress value={lvl.progress} className="mt-5" />
         </div>
@@ -96,8 +104,8 @@ export function Dashboard() {
         <div className="rounded-3xl bg-gradient-to-br from-cream-50 to-rose-100/60 p-7 ring-1 ring-ink-800/[0.05]">
           <div className="flex items-center gap-2">
             <Heart className="h-4 w-4 text-rose-500" />
-            <span className="font-display text-xs tracking-[0.32em] uppercase text-rose-600/70">
-              YOUR BADGES
+            <span className="font-display text-[0.7rem] tracking-[0.36em] uppercase text-rose-600/70">
+              Your badges
             </span>
           </div>
           <div className="mt-5 flex flex-wrap gap-2">
@@ -116,10 +124,15 @@ export function Dashboard() {
         <div className="rounded-3xl bg-white p-7 shadow-[0_8px_24px_-12px_rgba(45,42,38,0.1)] ring-1 ring-ink-800/[0.05]">
           <div className="flex items-center justify-between">
             <div>
-              <span className="font-display text-xs tracking-[0.32em] uppercase text-rose-600/70">
-                TODAY&apos;S RECOMMENDED
+              <span className="font-display text-[0.7rem] tracking-[0.36em] uppercase text-rose-600/70">
+                Today&apos;s recommended
               </span>
-              <h3 className="mt-2 font-serif text-2xl text-ink-800">今日のあなたへ</h3>
+              <h3
+                className="headline-jp mt-2 text-ink-800"
+                style={{ fontSize: "var(--type-h3)" }}
+              >
+                今日のあなたへ
+              </h3>
             </div>
             <Link href="/app/videos" className="text-xs text-rose-700 hover:underline">
               すべて見る
@@ -160,10 +173,15 @@ export function Dashboard() {
         <div className="rounded-3xl bg-white p-7 shadow-[0_8px_24px_-12px_rgba(45,42,38,0.1)] ring-1 ring-ink-800/[0.05]">
           <div className="flex items-center justify-between">
             <div>
-              <span className="font-display text-xs tracking-[0.32em] uppercase text-rose-600/70">
-                RECENT RECORDS
+              <span className="font-display text-[0.7rem] tracking-[0.36em] uppercase text-rose-600/70">
+                Recent records
               </span>
-              <h3 className="mt-2 font-serif text-2xl text-ink-800">最近の記録</h3>
+              <h3
+                className="headline-jp mt-2 text-ink-800"
+                style={{ fontSize: "var(--type-h3)" }}
+              >
+                最近の記録
+              </h3>
             </div>
             <Link href="/app/record" className="text-xs text-rose-700 hover:underline">
               すべて
@@ -206,9 +224,9 @@ function Metric({ label, value, icon: Icon }: { label: string; value: string; ic
     <div className="rounded-2xl bg-white/15 p-4 backdrop-blur ring-1 ring-white/20">
       <div className="flex items-center gap-2 text-rose-100/80">
         <Icon className="h-3.5 w-3.5" strokeWidth={1.4} />
-        <span className="text-[0.62rem] tracking-[0.24em] uppercase">{label}</span>
+        <span className="text-[0.62rem] tracking-[0.24em]">{label}</span>
       </div>
-      <div className="mt-2 font-display text-2xl text-white">{value}</div>
+      <div className="mt-2 font-display !font-light text-2xl tabular-nums text-white">{value}</div>
     </div>
   );
 }

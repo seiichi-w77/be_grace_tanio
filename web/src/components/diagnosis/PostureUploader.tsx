@@ -103,13 +103,15 @@ export function PostureUploader() {
           >
             <Section className="hero-gradient">
               <div className="max-w-3xl">
-                <EyebrowText>FRAMEWORK 03 · AI VISION</EyebrowText>
-                <h1 className="mt-6 font-serif text-4xl md:text-6xl font-light leading-[1.1] text-ink-800">
+                <EyebrowText>Framework 03 · AI Vision</EyebrowText>
+                <h1
+                  className="headline-jp mt-6 text-ink-800 max-w-[16ch]"
+                  style={{ fontSize: "var(--type-display)" }}
+                >
                   写真を3枚、
-                  <br />
-                  <span className="font-display italic text-rose-700">AI</span>が優しく見立てます。
+                  <span className="text-rose-700"><span className="font-display italic">AI</span>が優しく見立てます。</span>
                 </h1>
-                <p className="mt-6 max-w-xl text-sm md:text-base leading-loose text-ink-600">
+                <p className="lede-jp mt-6 max-w-[40ch] text-ink-600">
                   正面・横・後ろの全身写真をアップロード。あなたの代わりに、整骨院最高峰の視点で姿勢を読み解きます。写真はあなたの端末に留まり、Be Grace のサーバーには送信されません（モック）。
                 </p>
               </div>
@@ -135,7 +137,7 @@ export function PostureUploader() {
                               <CheckCircle2 className="h-4 w-4" />
                             </span>
                             <div>
-                              <div className="font-display text-2xl">{label}</div>
+                              <div className="font-jp-serif text-2xl !font-light">{label}</div>
                               <div className="mt-1 text-xs opacity-80">アップロード済み</div>
                             </div>
                           </div>
@@ -145,8 +147,8 @@ export function PostureUploader() {
                           <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-rose-100 to-rose-200 text-rose-700">
                             <Camera className="h-6 w-6" />
                           </span>
-                          <div className="font-display text-2xl text-ink-800">{label}</div>
-                          <p className="text-xs leading-relaxed text-ink-400">{hint}</p>
+                          <div className="font-jp-serif !font-light text-2xl text-ink-800">{label}</div>
+                          <p className="lede-jp text-xs text-ink-400 max-w-[18ch]">{hint}</p>
                         </div>
                       )}
                     </button>
@@ -181,10 +183,13 @@ export function PostureUploader() {
                   <div className="absolute inset-0 animate-pulse rounded-full bg-gradient-to-br from-rose-200 to-rose-300 blur-2xl" />
                   <Loader2 className="relative h-12 w-12 animate-spin text-rose-600" strokeWidth={1.2} />
                 </div>
-                <h2 className="mt-12 font-serif text-3xl md:text-4xl font-light text-ink-800">
+                <h2
+                  className="headline-jp mt-12 text-ink-800"
+                  style={{ fontSize: "var(--type-h2)" }}
+                >
                   AIが見立てています…
                 </h2>
-                <p className="mt-3 text-sm text-ink-400">{statusFor(progress)}</p>
+                <p className="lede-jp mt-3 text-[0.95rem] text-ink-400">{statusFor(progress)}</p>
                 <div className="mx-auto mt-10 max-w-md">
                   <Progress value={progress} />
                   <div className="mt-3 text-xs text-ink-400">{Math.round(progress)}%</div>
@@ -203,18 +208,22 @@ export function PostureUploader() {
           >
             <Section className="hero-gradient">
               <div className="max-w-3xl">
-                <EyebrowText>AI VISION REPORT</EyebrowText>
-                <h1 className="mt-6 font-serif text-5xl md:text-7xl font-light leading-[1.05] text-ink-800">
+                <EyebrowText>AI Vision Report</EyebrowText>
+                <h1
+                  className="headline-jp mt-6 text-ink-800 max-w-[14ch]"
+                  style={{ fontSize: "var(--type-display)" }}
+                >
                   あなたの姿勢
-                  <br />
-                  <span className="font-display italic text-rose-700">スコア {mockReport.score}</span>
+                  <span className="block text-rose-700">
+                    スコア <span className="font-display italic !font-light tabular-nums">{mockReport.score}</span>
+                  </span>
                 </h1>
-                <p className="mt-8 max-w-2xl font-serif text-xl leading-relaxed text-ink-800/85">
+                <p className="font-jp-serif mt-8 text-[1.15rem] md:text-[1.35rem] leading-[1.85] text-ink-800/85 max-w-[34ch]">
                   {mockReport.summary}
                 </p>
               </div>
 
-              <div className="mt-14 grid gap-5 md:grid-cols-4">
+              <div className="mt-12 grid gap-4 sm:grid-cols-2 md:grid-cols-4">
                 {[
                   { label: "骨盤", value: mockReport.pelvis.label },
                   { label: "肩", value: mockReport.shoulder.label },
@@ -222,36 +231,44 @@ export function PostureUploader() {
                   { label: "胸郭", value: mockReport.chest.label },
                 ].map((m) => (
                   <div key={m.label} className="rounded-3xl bg-white/70 p-6 backdrop-blur ring-1 ring-ink-800/[0.05]">
-                    <div className="text-[0.65rem] tracking-[0.32em] uppercase text-ink-400">
+                    <div className="font-display text-[0.65rem] tracking-[0.32em] uppercase text-ink-400">
                       {m.label}
                     </div>
-                    <div className="mt-3 font-serif text-lg text-ink-800">{m.value}</div>
+                    <div className="font-jp-serif !font-light mt-3 text-lg text-ink-800">{m.value}</div>
                   </div>
                 ))}
               </div>
             </Section>
 
             <Section>
-              <div className="grid gap-10 md:grid-cols-[1.2fr_1fr]">
+              <div className="grid gap-8 md:grid-cols-[1.2fr_1fr]">
                 <div className="rounded-3xl bg-white p-8 shadow-[0_1px_2px_rgba(45,42,38,0.04),0_8px_24px_rgba(45,42,38,0.06)] ring-1 ring-ink-800/[0.05]">
-                  <EyebrowText>INSIGHTS</EyebrowText>
-                  <h2 className="mt-4 font-serif text-3xl font-light text-ink-800">
+                  <EyebrowText>Insights</EyebrowText>
+                  <h2
+                    className="headline-jp mt-4 text-ink-800"
+                    style={{ fontSize: "var(--type-h2)" }}
+                  >
                     AIが見ているもの
                   </h2>
-                  <ul className="mt-6 space-y-5">
+                  <ul className="mt-6 space-y-5 max-w-[44ch]">
                     {mockReport.insights.map((m, idx) => (
                       <li key={idx} className="flex items-start gap-4">
-                        <span className="mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-rose-100 font-display text-xs text-rose-700">
+                        <span className="mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-rose-100 font-display !font-light tabular-nums text-xs text-rose-700">
                           {idx + 1}
                         </span>
-                        <p className="text-sm leading-relaxed text-ink-700">{m}</p>
+                        <p className="lede-jp text-[0.95rem] text-ink-700">{m}</p>
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div className="rounded-3xl bg-gradient-to-br from-rose-600 to-rose-500 p-8 text-white">
-                  <EyebrowText className="text-white/70">RECOMMENDED ACTIONS</EyebrowText>
-                  <h2 className="mt-4 font-serif text-3xl font-light">今日からの3つ</h2>
+                  <EyebrowText className="!text-white/70">Recommended actions</EyebrowText>
+                  <h2
+                    className="headline-jp mt-4 text-white"
+                    style={{ fontSize: "var(--type-h2)" }}
+                  >
+                    今日からの3つ
+                  </h2>
                   <ul className="mt-6 space-y-4">
                     {mockReport.actions.map((a, idx) => (
                       <li key={idx}>

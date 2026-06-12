@@ -47,12 +47,15 @@ export function GoalsPanel() {
 
   return (
     <div className="space-y-6">
-      <header className="flex items-end justify-between">
+      <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <span className="font-display text-xs tracking-[0.32em] uppercase text-rose-600/70">
-            YOUR GOALS
+          <span className="font-display text-[0.7rem] tracking-[0.36em] uppercase text-rose-600/70">
+            Your goals
           </span>
-          <h2 className="mt-2 font-serif text-3xl md:text-4xl font-light text-ink-800">
+          <h2
+            className="headline-jp mt-3 text-ink-800 max-w-[22ch]"
+            style={{ fontSize: "var(--type-h2)" }}
+          >
             なりたい未来から、今日を選ぶ。
           </h2>
         </div>
@@ -69,7 +72,12 @@ export function GoalsPanel() {
           onSubmit={submit}
           className="rounded-3xl bg-white p-7 shadow-[0_8px_24px_-12px_rgba(45,42,38,0.1)] ring-1 ring-ink-800/[0.05]"
         >
-          <h3 className="font-serif text-2xl text-ink-800">あなたの理想の未来</h3>
+          <h3
+            className="headline-jp text-ink-800"
+            style={{ fontSize: "var(--type-h3)" }}
+          >
+            あなたの理想の未来
+          </h3>
           <div className="mt-6 grid gap-5 md:grid-cols-2">
             <label className="block md:col-span-2">
               <span className="text-xs tracking-wider text-ink-400">タイトル</span>
@@ -173,13 +181,18 @@ export function GoalsPanel() {
                         </Badge>
                       )}
                     </div>
-                    <h3 className="mt-3 font-serif text-2xl font-light text-ink-800">{g.title}</h3>
-                    <p className="mt-2 max-w-xl text-sm text-ink-400 leading-relaxed">
+                    <h3
+                      className="headline-jp mt-3 text-ink-800 max-w-[22ch]"
+                      style={{ fontSize: "var(--type-h3)" }}
+                    >
+                      {g.title}
+                    </h3>
+                    <p className="lede-jp mt-2 max-w-[36ch] text-[0.9rem] text-ink-400">
                       {g.description}
                     </p>
                   </div>
-                  <div className="text-right">
-                    <div className="font-display text-3xl text-rose-700">
+                  <div className="text-right shrink-0">
+                    <div className="font-display !font-light tabular-nums text-3xl text-rose-700">
                       {g.current}<span className="text-base text-ink-400">/{g.target}</span>
                     </div>
                     <div className="text-xs text-ink-400">{g.unit}</div>

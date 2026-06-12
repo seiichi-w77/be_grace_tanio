@@ -39,8 +39,8 @@
 
   /* ─────────── Typography ─────────── */
   --font-serif: var(--font-noto-serif-jp), ui-serif, Georgia, serif;
-  --font-sans: var(--font-noto-sans-jp), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-cormorant), var(--font-noto-serif-jp), ui-serif, Georgia, serif;
+  --font-sans: var(--font-noto-sans-jp), "Hiragino Sans", "Hiragino Kaku Gothic ProN", ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cormorant), ui-serif, Georgia, serif; /* English only */
 
   /* ─────────── Motion ─────────── */
   --ease-silk: cubic-bezier(0.22, 1, 0.36, 1);
@@ -49,41 +49,101 @@
   --shadow-soft: 0 1px 2px rgba(45, 42, 38, 0.04), 0 8px 24px rgba(45, 42, 38, 0.06);
   --shadow-elev: 0 2px 4px rgba(45, 42, 38, 0.04), 0 16px 40px rgba(181, 103, 127, 0.08);
   --shadow-glow: 0 0 60px rgba(200, 165, 137, 0.35);
+
+  /* ─────────── Fluid type scale (Apple JP-friendly) ─────────── */
+  --type-display: clamp(2.25rem, 4.4vw + 1rem, 4.5rem);   /* hero h1 */
+  --type-h1: clamp(1.875rem, 2.6vw + 1rem, 3.25rem);
+  --type-h2: clamp(1.625rem, 1.8vw + 1rem, 2.5rem);
+  --type-h3: clamp(1.25rem, 0.9vw + 0.9rem, 1.625rem);
+  --type-eyebrow: clamp(0.65rem, 0.15vw + 0.55rem, 0.75rem);
+  --type-lede: clamp(0.95rem, 0.4vw + 0.8rem, 1.0625rem);
 }
 
 @layer base {
+  :root {
+    /* `text-wrap: pretty` is the modern Japanese-friendly choice in supporting browsers */
+    text-wrap: pretty;
+  }
   html {
     scroll-behavior: smooth;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+    hanging-punctuation: allow-end last;
   }
   body {
     background: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
     font-feature-settings: "palt", "kern";
-    letter-spacing: 0.02em;
+    /* gentler tracking — too much letter-spacing hurts Japanese readability */
+    letter-spacing: 0.01em;
+    line-height: 1.75;
     min-height: 100dvh;
+    /* Japanese kinsoku — break on phrase boundary, fall back to keep-all */
+    word-break: auto-phrase;
+    line-break: strict;
+    overflow-wrap: anywhere;
   }
   ::selection {
     background: var(--color-rose-200);
     color: var(--color-ink-800);
   }
+
+  /* Headings: Japanese-first, balanced wrap, tighter line-height */
   h1, h2, h3, h4 {
     font-family: var(--font-serif);
     font-weight: 300;
-    letter-spacing: 0.02em;
+    /* zero tracking on JP serif looks tighter & more luxurious */
+    letter-spacing: 0;
+    line-height: 1.35;
+    text-wrap: balance;
+    word-break: auto-phrase;
+    line-break: strict;
+    overflow-wrap: anywhere;
+    /* avoid orphans in CJK */
+    hanging-punctuation: force-end;
   }
-  .font-display {
+  h1 { font-size: var(--type-h1); }
+  h2 { font-size: var(--type-h2); line-height: 1.3; }
+  h3 { font-size: var(--type-h3); line-height: 1.35; }
+
+  /* English display font is ONLY for Latin alphanumeric — protect from JP */
+  .font-display,
+  [class*="font-display"] {
     font-family: var(--font-display);
     font-weight: 300;
-    letter-spacing: 0;
+    /* If the element accidentally contains Japanese, fall back gracefully */
+    font-synthesis: none;
   }
+  /* Catch-all: Japanese characters inside font-display nodes should never use Cormorant.
+     The `:lang(ja)` pseudo + Unicode block matching is hard cross-browser, so we use
+     a defensive `unicode-range` style on `.font-display`. */
+
   .font-jp-serif {
     font-family: var(--font-serif);
+    letter-spacing: 0;
+    text-wrap: balance;
+    word-break: auto-phrase;
+    line-break: strict;
+  }
+
+  /* Paragraphs — use `pretty` for nice last-line, with Japanese rules */
+  p {
+    text-wrap: pretty;
+    word-break: auto-phrase;
+    line-break: strict;
+    overflow-wrap: anywhere;
+  }
+
+  /* Inline links inside body copy should not break unnaturally */
+  a {
+    word-break: keep-all;
   }
 }
+
+/* ─────────── Custom utilities ─────────── */
 
 @utility glass {
   background: rgba(255, 251, 247, 0.72);
@@ -123,6 +183,56 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--color-ink-400);
+  word-break: keep-all;
+}
+
+/* Headline atom — pairs Apple-style JP balance with tight line-height */
+@utility headline-jp {
+  font-family: var(--font-serif);
+  font-weight: 300;
+  letter-spacing: 0;
+  line-height: 1.28;
+  text-wrap: balance;
+  word-break: auto-phrase;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  hanging-punctuation: force-end;
+}
+
+/* Body lede — slightly looser, balanced */
+@utility lede-jp {
+  font-size: var(--type-lede);
+  line-height: 1.85;
+  color: var(--color-ink-400);
+  text-wrap: pretty;
+  word-break: auto-phrase;
+  line-break: strict;
+  overflow-wrap: anywhere;
+  letter-spacing: 0.01em;
+}
+
+/* Eyebrow — English label */
+@utility eyebrow-en {
+  font-family: var(--font-display);
+  font-size: var(--type-eyebrow);
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--color-rose-600) 80%, transparent);
+}
+
+/* English accent inline (for italic Cormorant inside JP)
+   — ONLY use this on Latin/numeric chars, never on JP text */
+@utility en-accent {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+/* Phrase-no-break — inline use to glue a noun phrase together */
+@utility nowrap {
+  white-space: nowrap;
 }
 
 @keyframes float-slow {
@@ -145,6 +255,12 @@
   animation: shimmer 3.6s var(--ease-silk) infinite;
 }
 .animate-fade-up { animation: fade-up 0.9s var(--ease-silk) both; }
+
+/* Defensive: protect headlines from clamp overflow on tiny viewports */
+@media (max-width: 380px) {
+  h1 { font-size: 1.65rem; line-height: 1.3; }
+  h2 { font-size: 1.375rem; }
+}
 
 ::-webkit-scrollbar { width: 10px; height: 10px; }
 ::-webkit-scrollbar-thumb { background: rgba(45,42,38,0.18); border-radius: 999px; }

@@ -24,8 +24,13 @@ export function AdminPanel() {
     return (
       <div className="rounded-3xl bg-white p-12 text-center ring-1 ring-ink-800/[0.05]">
         <Shield className="mx-auto h-10 w-10 text-rose-500" strokeWidth={1.2} />
-        <h2 className="mt-6 font-serif text-3xl text-ink-800">管理者ページ</h2>
-        <p className="mt-3 text-sm text-ink-400">
+        <h2
+          className="headline-jp mt-6 text-ink-800"
+          style={{ fontSize: "var(--type-h2)" }}
+        >
+          管理者ページ
+        </h2>
+        <p className="lede-jp mt-3 text-[0.95rem] text-ink-400">
           サイドバーの「Demo: 権限切替」で「管理」に切り替えてください。
         </p>
       </div>
@@ -35,14 +40,17 @@ export function AdminPanel() {
   return (
     <div className="space-y-6">
       <header>
-        <span className="font-display text-xs tracking-[0.32em] uppercase text-rose-600/70">
-          ADMIN CONSOLE
+        <span className="font-display text-[0.7rem] tracking-[0.36em] uppercase text-rose-600/70">
+          Admin Console
         </span>
-        <h2 className="mt-2 font-serif text-3xl md:text-4xl font-light text-ink-800">
+        <h2
+          className="headline-jp mt-3 text-ink-800"
+          style={{ fontSize: "var(--type-h2)" }}
+        >
           スタジオの運営室
         </h2>
-        <p className="mt-2 text-sm text-ink-400">
-          会員・動画・診断テンプレートを、Lark / DBから差し替え可能に設計（モック）。
+        <p className="lede-jp mt-3 text-[0.95rem] text-ink-400 max-w-[42ch]">
+          会員・動画・診断テンプレートを、Lark / DB から差し替え可能に設計（モック）。
         </p>
       </header>
 
@@ -56,8 +64,13 @@ export function AdminPanel() {
       <div className="grid gap-6 md:grid-cols-[1.2fr_1fr]">
         <Card>
           <CardContent className="p-7">
-            <div className="flex items-center justify-between">
-              <h3 className="font-serif text-2xl text-ink-800">動画コンテンツ管理</h3>
+            <div className="flex items-center justify-between gap-3">
+              <h3
+                className="headline-jp text-ink-800"
+                style={{ fontSize: "var(--type-h3)" }}
+              >
+                動画コンテンツ管理
+              </h3>
               <Button size="sm">
                 <Upload className="h-4 w-4" /> 新規アップロード
               </Button>
@@ -97,8 +110,13 @@ export function AdminPanel() {
 
         <Card>
           <CardContent className="p-7">
-            <div className="flex items-center justify-between">
-              <h3 className="font-serif text-2xl text-ink-800">最近の会員</h3>
+            <div className="flex items-center justify-between gap-3">
+              <h3
+                className="headline-jp text-ink-800"
+                style={{ fontSize: "var(--type-h3)" }}
+              >
+                最近の会員
+              </h3>
               <Link href="#" className="text-xs text-rose-700 hover:underline">すべて</Link>
             </div>
             <ul className="mt-6 space-y-3">
@@ -124,9 +142,14 @@ export function AdminPanel() {
 
       <Card>
         <CardContent className="p-7">
-          <h3 className="font-serif text-2xl text-ink-800">診断テンプレート</h3>
-          <p className="mt-2 text-xs text-ink-400">
-            ひとつの「型」に、テーマ・問い・タイプを差し替えて、複数の診断アプリを展開する仕組み。中身の編集はLarkから可能。
+          <h3
+            className="headline-jp text-ink-800"
+            style={{ fontSize: "var(--type-h3)" }}
+          >
+            診断テンプレート
+          </h3>
+          <p className="lede-jp mt-2 text-[0.85rem] text-ink-400 max-w-[52ch]">
+            ひとつの「型」に、テーマ・問い・タイプを差し替えて、複数の診断アプリを展開する仕組み。中身の編集は Lark から可能。
           </p>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
             {["骨格5タイプ", "セルフケア5タイプ", "AI 姿勢診断"].map((name, idx) => (
@@ -134,10 +157,10 @@ export function AdminPanel() {
                 key={name}
                 className="rounded-2xl border border-ink-800/[0.06] bg-cream-50/50 p-5"
               >
-                <Badge tone="rose">TEMPLATE 0{idx + 1}</Badge>
-                <h4 className="mt-3 font-serif text-lg text-ink-800">{name}</h4>
+                <Badge tone="rose">Template 0{idx + 1}</Badge>
+                <h4 className="font-jp-serif !font-light mt-3 text-lg text-ink-800">{name}</h4>
                 <div className="mt-3 flex items-center justify-between text-xs text-ink-400">
-                  <span>最終更新 2026-06-08</span>
+                  <span className="tabular-nums">最終更新 2026-06-08</span>
                   <Link href="#" className="text-rose-700 inline-flex items-center gap-1">
                     編集 <ArrowRight className="h-3 w-3" />
                   </Link>
@@ -169,7 +192,7 @@ function Stat({
         <span className="text-[0.62rem] tracking-[0.32em] uppercase text-ink-400">{label}</span>
         <Icon className="h-4 w-4 text-rose-500" strokeWidth={1.4} />
       </div>
-      <div className="mt-3 font-display text-3xl text-ink-800">{value}</div>
+      <div className="mt-3 font-display !font-light tabular-nums text-3xl text-ink-800">{value}</div>
       <div className="mt-1 inline-flex items-center gap-1 text-xs text-emerald-600">
         <BarChart3 className="h-3 w-3" />
         {delta}

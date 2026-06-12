@@ -28,8 +28,8 @@ export function Philosophy() {
         eyebrow="OUR PHILOSOPHY"
         title={
           <>
-            女性のからだは、<br className="hidden md:block" />
-            <span className="font-display italic text-rose-700">受け取る</span>もの。
+            女性のからだは、
+            <span className="text-rose-700">受け取る</span>もの。
           </>
         }
         description="Be Grace は、産後・育児中の毎日を頑張る女性が、自分のからだに優しく戻ってくるためのスタジオです。"
@@ -45,9 +45,15 @@ export function Philosophy() {
             transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.22, 1, 0.36, 1] }}
             className="group relative overflow-hidden rounded-3xl border border-ink-800/[0.06] bg-white/70 p-8 backdrop-blur transition-all hover:-translate-y-1 hover:shadow-[0_20px_40px_-20px_rgba(181,103,127,0.25)]"
           >
-            <span className="font-display text-5xl italic text-rose-300/70">{t.eyebrow}</span>
-            <h3 className="mt-4 text-2xl font-light tracking-wide text-ink-800">{t.title}</h3>
-            <p className="mt-4 text-sm leading-relaxed text-ink-400">{t.body}</p>
+            {/* English numeric — Cormorant safe */}
+            <span className="font-display !font-light text-5xl italic text-rose-300/80 tabular-nums">{t.eyebrow}</span>
+            <h3
+              className="headline-jp mt-4 text-ink-800"
+              style={{ fontSize: "var(--type-h3)" }}
+            >
+              {t.title}
+            </h3>
+            <p className="lede-jp mt-4 text-ink-400 max-w-[36ch]">{t.body}</p>
             <div className="absolute -right-4 -bottom-4 h-32 w-32 rounded-full bg-gradient-to-br from-rose-100/0 to-rose-200/30 blur-2xl transition-opacity group-hover:opacity-100" />
           </motion.div>
         ))}

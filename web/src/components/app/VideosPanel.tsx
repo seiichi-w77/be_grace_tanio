@@ -25,10 +25,13 @@ export function VideosPanel() {
   return (
     <div className="space-y-8">
       <header className="space-y-4">
-        <span className="font-display text-xs tracking-[0.32em] uppercase text-rose-600/70">
-          VIDEO LIBRARY
+        <span className="font-display text-[0.7rem] tracking-[0.36em] uppercase text-rose-600/70">
+          Video Library
         </span>
-        <h2 className="font-serif text-3xl md:text-4xl font-light text-ink-800">
+        <h2
+          className="headline-jp text-ink-800 max-w-[20ch]"
+          style={{ fontSize: "var(--type-h2)" }}
+        >
           受け取れる、動画レッスン。
         </h2>
         <div className="relative max-w-md">

@@ -20,17 +20,21 @@ export default function ConsultationPage() {
     <PageShell>
       <Section className="hero-gradient">
         <div className="max-w-3xl">
-          <EyebrowText>PRIVATE SESSION</EyebrowText>
-          <h1 className="mt-6 font-serif text-5xl md:text-7xl font-light leading-[1.05] text-ink-800">
+          <EyebrowText>Private Session</EyebrowText>
+          <h1
+            className="headline-jp mt-6 text-ink-800 max-w-[12ch]"
+            style={{ fontSize: "var(--type-display)" }}
+          >
             あなただけの、
-            <br />
-            <span className="font-display italic text-rose-700">60 分。</span>
+            <span className="text-rose-700">
+              <span className="font-display !font-light italic">60</span>分。
+            </span>
           </h1>
-          <p className="mt-8 max-w-xl text-base leading-loose text-ink-600">
-            診断結果を、あなたの今の日常と照らし合わせて。本講座を取る前でも取らなくてもいい、ただあなただけの 60 分。1 回 15,000 円（税込）。
+          <p className="lede-jp mt-8 max-w-[36ch] text-ink-600">
+            診断結果を、あなたの今の日常と照らし合わせて。本講座を取る前でも取らなくてもいい、ただあなただけの60分。1回 15,000円（税込）。
           </p>
           <div className="mt-10 flex flex-wrap items-center gap-3">
-            <span className="tag-pill"><Clock className="h-3 w-3" />60 分</span>
+            <span className="tag-pill"><Clock className="h-3 w-3" />60分</span>
             <span className="tag-pill"><Calendar className="h-3 w-3" />オンライン</span>
             <span className="tag-pill"><Sparkles className="h-3 w-3" />税込 ¥15,000</span>
           </div>
@@ -40,11 +44,14 @@ export default function ConsultationPage() {
       <Section>
         <div className="grid gap-12 md:grid-cols-[1.1fr_1fr]">
           <div>
-            <EyebrowText>WHAT WE'LL DO</EyebrowText>
-            <h2 className="mt-4 font-serif text-3xl md:text-4xl font-light text-ink-800">
-              60 分でお返しするもの
+            <EyebrowText>What we&apos;ll do</EyebrowText>
+            <h2
+              className="headline-jp mt-5 text-ink-800"
+              style={{ fontSize: "var(--type-h2)" }}
+            >
+              60分でお返しするもの
             </h2>
-            <ul className="mt-8 space-y-5">
+            <ul className="mt-8 space-y-5 max-w-[42ch]">
               {[
                 "AI診断結果を、整骨院最高峰の視点で再解釈",
                 "今のあなたの「3ヶ月後の景色」を一緒に言語化",
@@ -53,15 +60,18 @@ export default function ConsultationPage() {
               ].map((item) => (
                 <li key={item} className="flex items-start gap-3">
                   <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-rose-500" strokeWidth={1.5} />
-                  <span className="text-base leading-relaxed text-ink-700">{item}</span>
+                  <span className="lede-jp text-ink-700 text-[0.98rem]">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
           <div>
-            <EyebrowText>NEXT AVAILABLE</EyebrowText>
-            <h2 className="mt-4 font-serif text-3xl md:text-4xl font-light text-ink-800">
+            <EyebrowText>Next available</EyebrowText>
+            <h2
+              className="headline-jp mt-5 text-ink-800"
+              style={{ fontSize: "var(--type-h2)" }}
+            >
               空き状況
             </h2>
             <div className="mt-8 grid gap-3">
@@ -72,18 +82,18 @@ export default function ConsultationPage() {
                   className="group flex items-center justify-between rounded-2xl border border-ink-800/[0.06] bg-white px-5 py-4 text-left transition-all hover:-translate-y-[1px] hover:border-rose-300 hover:bg-rose-50/50 disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   <div>
-                    <div className="text-sm font-medium text-ink-800">{s.date}</div>
-                    <div className="text-xs text-ink-400">{s.time}</div>
+                    <div className="text-sm font-medium text-ink-800 tabular-nums">{s.date}</div>
+                    <div className="text-xs text-ink-400 tabular-nums">{s.time}</div>
                   </div>
                   <div className="text-right">
-                    <div className="text-[0.65rem] tracking-[0.32em] uppercase text-ink-400">
+                    <div className="font-display text-[0.65rem] tracking-[0.32em] uppercase text-ink-400">
                       {s.left === 0 ? "満席" : `残 ${s.left} 枠`}
                     </div>
                   </div>
                 </button>
               ))}
             </div>
-            <div className="mt-8 text-center">
+            <div className="mt-8">
               <Button asChild size="lg" className="w-full">
                 <Link href="/signup">予約に進む</Link>
               </Button>

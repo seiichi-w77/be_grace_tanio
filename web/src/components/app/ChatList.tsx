@@ -12,12 +12,15 @@ export function ChatList() {
 
   return (
     <div className="space-y-6">
-      <header className="flex items-end justify-between">
+      <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
-          <span className="font-display text-xs tracking-[0.32em] uppercase text-rose-600/70">
-            CONSULTATIONS
+          <span className="font-display text-[0.7rem] tracking-[0.36em] uppercase text-rose-600/70">
+            Consultations
           </span>
-          <h2 className="mt-2 font-serif text-3xl md:text-4xl font-light text-ink-800">
+          <h2
+            className="headline-jp mt-3 text-ink-800 max-w-[24ch]"
+            style={{ fontSize: "var(--type-h2)" }}
+          >
             相談したいときに、相談できる場所。
           </h2>
         </div>
