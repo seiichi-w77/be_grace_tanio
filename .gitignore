@@ -146,4 +146,6 @@ docs/
 AGENTS.md
 .ccagi.yml
 .ccagi/
-.github/
+# .github/ — allow workflows folder for deployment, exclude others
+.github/workflows/e2e.yml
+.github/workflows/project-sync.yml

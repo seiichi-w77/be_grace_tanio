@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { PageShell } from "@/components/site/PageShell";
-import { DiagnosisResult } from "@/components/diagnosis/DiagnosisResult";
+import { DiagnosisResultClient } from "@/components/diagnosis/DiagnosisResultClient";
 import { getDiagnosisBySlug, DIAGNOSES } from "@/lib/mock/diagnoses";
 
 export function generateStaticParams() {
@@ -9,20 +10,18 @@ export function generateStaticParams() {
 
 export default async function DiagnosisResultPage({
   params,
-  searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ type?: string }>;
 }) {
   const { slug } = await params;
-  const { type } = await searchParams;
   const theme = getDiagnosisBySlug(slug);
   if (!theme || theme.results.length === 0) notFound();
-  const result = theme.results.find((r) => r.type === type) ?? theme.results[0];
 
   return (
     <PageShell>
-      <DiagnosisResult theme={theme} result={result} />
+      <Suspense fallback={<div className="py-32 text-center text-ink-400">読み込み中…</div>}>
+        <DiagnosisResultClient slug={slug} />
+      </Suspense>
     </PageShell>
   );
 }
